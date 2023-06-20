@@ -1,0 +1,21 @@
+# dev/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: nginx-dev-ns
+resources:
+  - namespace.yaml
+bases:
+  - ../../base
+patchesStrategicMerge:
+  - replica_patch.yaml
+configMapGenerator:
+- name: web-app-config
+  literals:
+    - hostname=dev-db.devoriales.com
+    - port=5432
+    - dbname=webapp-dev
+secretGenerator:
+- name: web-app-credentials
+  literals:
+    - username=dev-user
+    - password=dev-password

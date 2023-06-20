@@ -13,3 +13,13 @@ patchesStrategicMerge:
     name: nginx
   spec:
     replicas: 3
+# create configmap
+configMapGenerator:
+- name: my-config
+  files:
+    - prod-config.properties
+# create secret
+secretGenerator:
+- name: my-secret
+  files:
+    - prod-secret.txt
