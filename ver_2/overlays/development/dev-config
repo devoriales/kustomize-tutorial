@@ -1,3 +1,0 @@
-hostname=dev-db.devoriales.com
-port=5432
-dbname=webapp-dev

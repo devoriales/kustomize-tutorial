@@ -1,25 +1,21 @@
+# dev/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: nginx-prod-ns
 resources:
   - namespace.yaml
 bases:
-- ../../base
+  - ../../base
 patchesStrategicMerge:
-- |-
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    name: nginx
-  spec:
-    replicas: 3
-# create configmap
+  - replica_patch.yaml
 configMapGenerator:
-- name: my-config
-  files:
-    - prod-config.properties
-# create secret
+- name: web-app-config
+  literals:
+    - hostname=prod-db.devoriales.com
+    - port=5432
+    - dbname=webapp-prod
 secretGenerator:
-- name: my-secret
-  files:
-    - prod-secret.txt
+- name: web-app-credentials
+  literals:
+    - username=prod-user
+    - password=prod-password

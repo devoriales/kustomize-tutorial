@@ -18,4 +18,4 @@ secretGenerator:
 - name: web-app-credentials
   literals:
     - username=dev-user
-    - password=dev-password
+    - password=dev-password-2
